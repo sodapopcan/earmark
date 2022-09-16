@@ -546,6 +546,9 @@ defmodule Earmark.Transform do
   end
 
   defp _walk_ast_with(ast, value, fun, ignore_strings, result)
+  defp _walk_ast_with({ast, _}, value, fun, ignore_strings, result) do
+    _walk_ast_with(ast, value, fun, ignore_strings, result)
+  end
   defp _walk_ast_with([], value, _fun, _ignore_strings, result), do: {Enum.reverse(result), value}
   defp _walk_ast_with([[]|rest], value, _fun, ignore_strings, result) do
     {popped_result, fun} = _pop_to_pop(result)
